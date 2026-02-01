@@ -10,11 +10,13 @@ log = lambda msg: print(f"[{time.strftime('%H:%M:%S')}] {msg}")
 DISCORD_CLIENT_ID, WHITELIST = load_final_config()
 
 tracker = AppTracker(WHITELIST)
+recon = False
 rpc = DiscordRPC(DISCORD_CLIENT_ID)
+        
+    
 last_app = None
 
 rpc_active = False
-recon = False
 
 while True:
     try:

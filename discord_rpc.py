@@ -1,13 +1,21 @@
 import os
+import time
 from pypresence import Presence
 from pypresence.types import ActivityType
 
 class DiscordRPC:
     def __init__(self, client_id: str):
-        self.rpc = Presence(client_id)
-        self.rpc.connect()
-        self.pid = os.getpid()
-        self.connected = True
+        while True:
+            try:
+                self.rpc = Presence(client_id)
+                self.rpc.connect()
+                self.pid = os.getpid()
+                self.connected = True
+                print("Successfully connected to discord desktop client.")
+                break
+            except:
+                print("Discord is not open. Reconnecting in 5...")
+                time.sleep(5)
 
     def disconnect(self):
         if self.connected:
